@@ -1,10 +1,6 @@
 [
     {
-        "merged": "C:\\Users\\makn\\AndroidStudioProjects\\course2016\\CanvasDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\pacman.png",
-        "source": "C:\\Users\\makn\\AndroidStudioProjects\\course2016\\CanvasDemo\\app\\src\\main\\res\\drawable-hdpi\\pacman.png"
-    },
-    {
-        "merged": "C:\\Users\\makn\\AndroidStudioProjects\\course2016\\CanvasDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "C:\\Users\\makn\\AndroidStudioProjects\\course2016\\CanvasDemo\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\camil\\Documents\\GitHub\\CanvasDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\orgghost.jpeg",
+        "source": "C:\\Users\\camil\\Documents\\GitHub\\CanvasDemo\\app\\src\\main\\res\\drawable-hdpi\\orgghost.jpeg"
     }
 ]

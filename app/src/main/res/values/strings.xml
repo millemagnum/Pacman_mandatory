@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Canvas Demo</string>
-    <string name="points">Points: 0</string>
+    <string name="points">Points:</string>
+    <string name="timer">Timer:</string>
     <string name="action_settings">Settings</string>
 
 </resources>
