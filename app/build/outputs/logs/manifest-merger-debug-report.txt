@@ -9,14 +9,14 @@ ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManife
 		ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
 ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\65d882513001614f33d203de735d31a07628ad05\output\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.2.0] C:\Users\camil\.android\build-cache\b88d423637f3b5cfebeec0e0ee3ef863986dea15\output\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.2.0] C:\Users\camil\.android\build-cache\db88aa0f09e3e592bfce9fe34baa6cb49295dd9f\output\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.2.0] C:\Users\camil\.android\build-cache\123f35121a4ac5d95ea8f9ed80b96235b080a7ed\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\camil\.android\build-cache\02229ff6944eb3056ad4375f679ac895fb9ecaff\output\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-compat:25.2.0] C:\Users\camil\.android\build-cache\45a99972767b17c0e2aa74bfaa04df79e75214db\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\520708d54c3d81167712e3cb0d65a3e50b4296d1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.2.0] C:\Users\camil\.android\build-cache\b3bb6fb8da3f1473b7b80e3cbfe180e472cdc95f\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.2.0] C:\Users\camil\.android\build-cache\fda8ecc84aad458c314cbe9f4b2c3a8f9f8ba112\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.2.0] C:\Users\camil\.android\build-cache\2b1190d4a886513e53390d49b3cd341131ab396f\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\camil\.android\build-cache\bb89211c409d8c42608c244198320c5277f877d6\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.2.0] C:\Users\camil\.android\build-cache\e349c60aab3cb0a6f04f40aa9edfcaa27329ebfe\output\AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\65d882513001614f33d203de735d31a07628ad05\output\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\520708d54c3d81167712e3cb0d65a3e50b4296d1\output\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
 		ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml:7:9-38
 		INJECTED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml
@@ -27,12 +27,12 @@ MERGED from [com.android.support:support-compat:25.2.0] C:\Users\camil\.android\
 		INJECTED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml
 application
 ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml:9:5-23:19
-MERGED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\65d882513001614f33d203de735d31a07628ad05\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:25.2.0] C:\Users\camil\.android\build-cache\b88d423637f3b5cfebeec0e0ee3ef863986dea15\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:25.2.0] C:\Users\camil\.android\build-cache\db88aa0f09e3e592bfce9fe34baa6cb49295dd9f\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:25.2.0] C:\Users\camil\.android\build-cache\123f35121a4ac5d95ea8f9ed80b96235b080a7ed\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\camil\.android\build-cache\02229ff6944eb3056ad4375f679ac895fb9ecaff\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-compat:25.2.0] C:\Users\camil\.android\build-cache\45a99972767b17c0e2aa74bfaa04df79e75214db\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.2.0] C:\Users\camil\.android\build-cache\520708d54c3d81167712e3cb0d65a3e50b4296d1\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.2.0] C:\Users\camil\.android\build-cache\b3bb6fb8da3f1473b7b80e3cbfe180e472cdc95f\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.2.0] C:\Users\camil\.android\build-cache\fda8ecc84aad458c314cbe9f4b2c3a8f9f8ba112\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.2.0] C:\Users\camil\.android\build-cache\2b1190d4a886513e53390d49b3cd341131ab396f\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\camil\.android\build-cache\bb89211c409d8c42608c244198320c5277f877d6\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.2.0] C:\Users\camil\.android\build-cache\e349c60aab3cb0a6f04f40aa9edfcaa27329ebfe\output\AndroidManifest.xml:25:5-20
 	android:label
 		ADDED from C:\Users\camil\Documents\GitHub\CanvasDemo\app\src\main\AndroidManifest.xml:12:9-41
 	android:allowBackup

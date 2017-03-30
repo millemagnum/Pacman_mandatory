@@ -1,5 +1,8 @@
 package org.example.canvasdemo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,7 +10,7 @@ import java.util.Random;
  * Created by camil on 16-03-2017.
  */
 
-public class GoldCoin {
+public class GoldCoin implements Parcelable {
 
     // skal lave gettere og settere for coinTaken, der skal returnere om coin
     // er taken eller ej - true eller false
@@ -53,6 +56,36 @@ public class GoldCoin {
     public GoldCoin(int coinx, int coiny) {
         this.coinx = coinx;
         this.coiny = coiny;
+    }
+
+    // skal have dem for at kunne implementere Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(coinx);
+        out.writeInt(coiny);
+    }
+
+    // Creator
+    public static final Parcelable.Creator<GoldCoin> CREATOR
+            = new Parcelable.Creator<GoldCoin>() {
+        public GoldCoin createFromParcel(Parcel in) {
+            return new GoldCoin(in);
+        }
+
+        public GoldCoin[] newArray(int size) {
+            return new GoldCoin[size];
+        }
+    };
+
+    // "De-parcel object
+    public GoldCoin(Parcel in) {
+        coinx = in.readInt();
+        coiny = in.readInt();
     }
 
 }

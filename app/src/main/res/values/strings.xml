@@ -2,8 +2,15 @@
 <resources>
 
     <string name="app_name">Canvas Demo</string>
-    <string name="points">Points:</string>
+    <string name="points">Points: 0</string>
     <string name="timer">Timer:</string>
+    <string name="rightbutton">→</string>
+    <string name="leftbutton">←</string>
+    <string name="upbutton">↑</string>
+    <string name="downbutton">↓</string>
+    <string name="newgamebutton">↻</string>
+    <string name="pausebutton">❚❚</string>
+    <string name="resumebutton">▶</string>
     <string name="action_settings">Settings</string>
 
 </resources>

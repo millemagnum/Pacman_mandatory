@@ -39,6 +39,9 @@ public class MyView extends View{
 	// ghost
 	Bitmap ghostbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ghost);
 
+	int enemypos1;
+	int enemypos2;
+
     //The coordinates for our dear pacman: (0,0) is the top-left corner
 	int pacx = 50;
     int pacy = 400;
@@ -122,17 +125,20 @@ public class MyView extends View{
 	//int enemyx = enemies.get(0).getEnemyx();
 
 	public void moveEnemyDown(int y) {
-		// vil gerne have fjenden til at bevæge sig i en lille firkant eller op og ned
+		// får fjenden til at bevæge sig nedad
 
 		if (enemies.get(0).getEnemyy()+y+ghostbitmap.getWidth()<h) {
 			// får fjenden til at bevæge sig nedad
-			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10);
+			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10); // var + 10
 		} else {
+			// kommer igennem skærmen som Pacman også gør
 			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() - 650);
 		}
 
 		invalidate();
 	}
+
+	/*
 
 	public void moveEnemyUp(int y) {
 
@@ -165,6 +171,7 @@ public class MyView extends View{
 
 		invalidate();
 	}
+	*/
 
 	public void resetGame()
 	{
@@ -195,11 +202,12 @@ public class MyView extends View{
 		invalidate();
 	}
 
-	public void newLevel(int x, int level)
+	public void newLevel(int x, int y, int level) //,ArrayList<GoldCoin> goldcoins, int level, int points, ArrayList<Enemy> enemies)
 	{
 
 		// resetter Pacman's position
 		pacx = x;
+		pacy = y;
 
 		// skal resette goldcoins - fjerner alle goldcoins
 		goldcoins.clear();
@@ -224,6 +232,41 @@ public class MyView extends View{
 	}
 
 
+
+	public void rotateScreen(int level) { // int x, int y, int ghostx, int ghosty, int level
+
+		// sætter værdierne omvendt, da skærmen roteres
+		//pacx = y;
+		//pacy = x;
+
+		// sætter Pacmans position til noget nyt ved orientation change
+		pacx = 50;
+		pacy = 50;
+
+		// sætter fjendens position til ny ved orientation change
+		//enemypos2 = (enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10));
+		//moveEnemyUp(20);
+
+		//
+		myActivity.gameRunning = true;
+		myActivity.level = level;
+		//myActivity.points = points;
+
+		// prøver at sætte fjendens position
+		//enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 200);
+		Enemy enemy = new Enemy();
+		enemies.add(enemy);
+
+		enemies.get(0).setEnemyx(200);
+		enemies.get(0).setEnemyy(50);
+
+
+		// bytter også rundt på værdierne for ghost - dropper det igen
+		//enemypos1 = ghostx;
+		//enemypos2 = ghosty;
+	}
+
+
 	/* The next 3 constructors are needed for the Android view system,
 	when we have a custom view.
 	 */
@@ -245,7 +288,8 @@ public class MyView extends View{
 	public double distance(int x1, int y1, int x2, int y2) {
 
 		// skal bruge pythagoras til at udregne distancen mellem pacman og coins
-		double distancemath = sqrt((x2-x1) + (y2-y1));
+		// skal huske at det skal være i anden, så det skal ganges med sig selv
+		double distancemath = sqrt(((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
 
 		return distancemath;
 	}
@@ -294,12 +338,13 @@ public class MyView extends View{
 				canvas.drawBitmap(coinbitmap, coin.getCoinx(), coin.getCoiny(), paint);
 			}
 
-			if ((distance(pacx, pacy, coin.getCoinx(), coin.getCoiny()) <= 6) && !coin.isCoinTaken()) {
+			// havde <= 4 før
+			if ((distance(pacx, pacy, coin.getCoinx(), coin.getCoiny()) <= 50) && !coin.isCoinTaken()) {
 
 				// her kalder jeg metoden pointChanger, som skal opdatere textview'et, med 1 hver gang den kaldes
 				myActivity.pointChanger(1);
 
-				// setter coinTaken til at være true, fordi den bliver taget af pacman
+				// sætter coinTaken til at være true, fordi den bliver taget af pacman
 				coin.setCoinTaken(true);
 			}
 
@@ -322,10 +367,19 @@ public class MyView extends View{
 				canvas.drawBitmap(ghostbitmap, enemy.getEnemyx(), enemy.getEnemyy(), paint);
 			//}
 
-			if ((distance(pacx, pacy, enemy.getEnemyx(), enemy.getEnemyy()) <= 4) && !enemy.didEnemyHit()) {
+			// havde <= 4 før
+			if ((distance(pacx, pacy, enemy.getEnemyx(), enemy.getEnemyy()) <= 50) && !enemy.didEnemyHit()) {
 
 				enemy.setEnemyHit(true);
 			}
+
+			// prøver at finde fjendens position
+			//enemypos1 = enemies.get(0).getEnemyy();
+			//enemypos2 = enemies.get(0).getEnemyx();
+
+			// enemypos1 = enemies.get(0).setEnemyy(20);
+
+
 
 		}
 

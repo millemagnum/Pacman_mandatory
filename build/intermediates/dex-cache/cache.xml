@@ -3,51 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\02229ff6944eb3056ad4375f679ac895fb9ecaff\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5cc23febfc62a2626d6462d15a26b59650c2d2a4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\camil\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_0127f572305b463f704ac591676900b4e1ad6f7d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\123f35121a4ac5d95ea8f9ed80b96235b080a7ed\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_369326638bfffb8161be1ad245bfc9be9bdb397a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\db88aa0f09e3e592bfce9fe34baa6cb49295dd9f\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cbf4b2dd3357f12a7daa07a2dfdff676db04cf79\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\b88d423637f3b5cfebeec0e0ee3ef863986dea15\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_47bc78563617c3cd684239e51960ec2bb5f24d91\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
@@ -57,12 +12,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\45a99972767b17c0e2aa74bfaa04df79e75214db\output\jars\classes.jar"
+        jar="C:\Users\camil\.android\build-cache\bb89211c409d8c42608c244198320c5277f877d6\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d06d0e4197065739c6ad9ae60531ad38072c36ef\classes.dex" />
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1ad0223e64e9b10ed6008c31b775eccf04333160\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\camil\.android\build-cache\fda8ecc84aad458c314cbe9f4b2c3a8f9f8ba112\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f3f13fb36d3136364be119836ee0850820d21f0d\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -75,12 +39,48 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\camil\.android\build-cache\65d882513001614f33d203de735d31a07628ad05\output\jars\classes.jar"
+        jar="C:\Users\camil\.android\build-cache\2b1190d4a886513e53390d49b3cd341131ab396f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_035c8d4a8e91840a41a072bd8bc41ae4afd109a9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\camil\.android\build-cache\e349c60aab3cb0a6f04f40aa9edfcaa27329ebfe\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cd0934d2526a2b7553268b4fc8bc48595cf01f68\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\camil\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_0127f572305b463f704ac591676900b4e1ad6f7d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\camil\.android\build-cache\520708d54c3d81167712e3cb0d65a3e50b4296d1\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_157c1db15eb4e33802523d32a9405a8b8e302dea\classes.dex" />
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a9f2bca46ff5bbfd54450f2ee02b063dcf17105f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\camil\.android\build-cache\b3bb6fb8da3f1473b7b80e3cbfe180e472cdc95f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Users\camil\Documents\GitHub\CanvasDemo\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5c9ec18c1654fb8fc0342e1a0fc8a82e7824b306\classes.dex" />
     </item>
 
 </items>

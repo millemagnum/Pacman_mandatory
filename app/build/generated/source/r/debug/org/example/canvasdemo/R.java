@@ -29,11 +29,11 @@ public final class R {
         public static final int moveLeftButton=0x7f080001;
         public static final int moveRightButton=0x7f080000;
         public static final int moveUpButton=0x7f080002;
-        public static final int newGameButton=0x7f080004;
-        public static final int pauseButton=0x7f080005;
-        public static final int resumeButton=0x7f080006;
-        public static final int scoreKeeper=0x7f080007;
-        public static final int timeCounter=0x7f080008;
+        public static final int newGameButton=0x7f080008;
+        public static final int pauseButton=0x7f080006;
+        public static final int resumeButton=0x7f080007;
+        public static final int scoreKeeper=0x7f080004;
+        public static final int timeCounter=0x7f080005;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -44,21 +44,21 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060000;
         public static final int app_name=0x7f060001;
-        public static final int points=0x7f060002;
-        public static final int timer=0x7f060003;
+        public static final int downbutton=0x7f060002;
+        public static final int leftbutton=0x7f060003;
+        public static final int newgamebutton=0x7f060004;
+        public static final int pausebutton=0x7f060005;
+        public static final int points=0x7f060006;
+        public static final int resumebutton=0x7f060007;
+        public static final int rightbutton=0x7f060008;
+        public static final int timer=0x7f060009;
+        public static final int upbutton=0x7f06000a;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
          */
         public static final int AppBaseTheme=0x7f040000;
-        /**  All customizations that are NOT specific to a particular API-level can go here. 
-         */
         public static final int AppTheme=0x7f040001;
     }
 }

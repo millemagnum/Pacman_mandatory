@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 	private Timer enemytimer;
 
 	// counter for countdown
-	private int counter = 10; // skal ændres til 10 sek til debug
+	private int counter = 60; // skal ændres til 10 sek til debug
 
 	// game running
 	public boolean gameRunning = false;
@@ -106,7 +106,8 @@ public class MainActivity extends Activity {
 			level += 1;
 
 			// kalder metode, der resetter Pacman, counter og enemies position for hvert level
-			myView.newLevel(50, 2);
+			//myView.newLevel(50, 0, goldcoins, level, points, enemies);
+			myView.newLevel(50, 0, level); // havde 1
 
 		}
 
@@ -134,8 +135,36 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		this.context = this;
+		// finder custom view
+		myView = (MyView) findViewById(R.id.gameView);
+		// vil bruge dette til at gemme informationer om spillet, så det kan spilles i landscape mode også
+		if (savedInstanceState != null) {
+			ArrayList<Enemy> enemies = savedInstanceState.getParcelableArrayList("enemies");
+			ArrayList<GoldCoin> goldcoins = savedInstanceState.getParcelableArrayList("goldcoins");
+			//myView.newLevel(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"),
+					//goldcoins,
+					//savedInstanceState.getInt("level"), savedInstanceState.getInt("points"),
+					//enemies); // crasher her!
+			//myView.newLevel(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"), savedInstanceState.getInt("level")); //= savedInstanceState.getInt("x");
+			//myView.pacx = savedInstanceState.getInt("x");
+			//myView.pacy = savedInstanceState.getInt("y");
+			//level = savedInstanceState.getInt("level");
+			//myView.rotateScreen(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"), savedInstanceState.getInt("ghostx"), savedInstanceState.getInt("ghosty"), savedInstanceState.getInt("level"));
+			myView.rotateScreen(savedInstanceState.getInt("level"));
 
+			gameRunning = savedInstanceState.getBoolean("gameRunning");
+			counter = savedInstanceState.getInt("counter");
+			// TODO - den sætter points til 0, når man vender skærmen??
+			points = savedInstanceState.getInt("points");
 
+			// hvis der er gemt noget
+			//if (saved != null) {
+			//	bag = saved;
+			//}
+		} else {
+			gameRunning = true;
+			points = 0;
+		}
 
 		// finder alle knapper
 		Button rightbutton = (Button) findViewById(R.id.moveRightButton);
@@ -145,8 +174,7 @@ public class MainActivity extends Activity {
 		Button newgamebutton = (Button) findViewById(R.id.newGameButton);
 		Button resumebutton = (Button) findViewById(R.id.resumeButton);
 		Button pausebutton = (Button) findViewById(R.id.pauseButton);
-		// finder custom view
-		myView = (MyView) findViewById(R.id.gameView);
+
 
 		// ny timer - for pacman
 		timer = new Timer();
@@ -419,12 +447,16 @@ public class MainActivity extends Activity {
 		myView.setCoins(goldcoins);
 	}
 
-	// lavar enemies med random placering
+	// skal alle coins være i landscape og ved orientation change?? eller er det okay at de ikke er
+	// er det ok at spøgelset ikke kommer 8/10 gange??
+
+	// laver enemies med random placering
 	public void spawnEnemies() {
 
+			// laver et random tal som bliver x og y position for ghost
 			for (int i = 0; i < 1; i++) {
 				Random randomnumber2 = new Random();
-				int randomx2 = randomnumber2.nextInt(600) + 100;
+				int randomx2 = randomnumber2.nextInt(600) + 100; // var 100
 				int randomy2 = randomnumber2.nextInt(600) + 100;
 
 				// tilføjer enemies til listen med x og y position
@@ -448,6 +480,8 @@ public class MainActivity extends Activity {
 		// viser tiden der går
 		timer.setText("Timer: " + counter);
 
+		// if sætning der sætter timeren ud fra hvilket level man er i - dette er min måde at gøre hver level
+		// sværere at gennemføre
 		if(level == 2) {
 
 			// sætter tiden til at være lavere i level 2
@@ -500,4 +534,27 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	// Gemmer værdierne til når skærmen skal vendes
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putParcelableArrayList("goldcoins", goldcoins);
+		//outState.putInt("x", myView.pacy); //pacx
+		//outState.putInt("y", myView.pacx); //pacy
+		outState.putInt("level", level);
+		outState.putInt("points", points);
+		outState.putBoolean("gameRunning", gameRunning);
+		outState.putInt("counter", counter);
+
+		//outState.putBoolean("gameover", isGameOver());
+		outState.putParcelableArrayList("enemies", enemies);
+
+		// prøver at få gemt fjendens position
+		//outState.putInt("ghosty", myView.enemies.get(0).getEnemyx());
+		//outState.putInt("ghostx", myView.enemies.get(0).getEnemyy());
+	}
+
 }

@@ -1,10 +1,13 @@
 package org.example.canvasdemo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by camil on 23-03-2017.
  */
 
-public class Enemy {
+public class Enemy implements Parcelable {
 
 
     private boolean enemyHit;
@@ -48,6 +51,36 @@ public class Enemy {
     public Enemy(int enemyx, int enemyy) {
         this.enemyx = enemyx;
         this.enemyy = enemyy;
+    }
+
+    // skal have dem for at kunne implementere Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(enemyx);
+        out.writeInt(enemyy);
+    }
+
+    // Creator
+    public static final Parcelable.Creator<Enemy> CREATOR
+            = new Parcelable.Creator<Enemy>() {
+        public Enemy createFromParcel(Parcel in) {
+            return new Enemy(in);
+        }
+
+        public Enemy[] newArray(int size) {
+            return new Enemy[size];
+        }
+    };
+
+    // "De-parcel object
+    public Enemy(Parcel in) {
+        enemyx = in.readInt();
+        enemyy = in.readInt();
     }
 
 }
