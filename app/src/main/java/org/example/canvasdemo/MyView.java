@@ -233,7 +233,7 @@ public class MyView extends View{
 
 
 
-	public void rotateScreen(int level) { // int x, int y, int ghostx, int ghosty, int level
+	public void rotateScreen(int level) { //int points) { // int x, int y, int ghostx, int ghosty, int level
 
 		// sætter værdierne omvendt, da skærmen roteres
 		//pacx = y;
@@ -251,6 +251,7 @@ public class MyView extends View{
 		myActivity.gameRunning = true;
 		myActivity.level = level;
 		//myActivity.points = points;
+        //myActivity.pointChanger(points);
 
 		// prøver at sætte fjendens position
 		//enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 200);

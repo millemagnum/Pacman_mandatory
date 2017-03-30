@@ -150,12 +150,13 @@ public class MainActivity extends Activity {
 			//myView.pacy = savedInstanceState.getInt("y");
 			//level = savedInstanceState.getInt("level");
 			//myView.rotateScreen(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"), savedInstanceState.getInt("ghostx"), savedInstanceState.getInt("ghosty"), savedInstanceState.getInt("level"));
-			myView.rotateScreen(savedInstanceState.getInt("level"));
+			myView.rotateScreen(savedInstanceState.getInt("level")); //, savedInstanceState.getInt("points"));
+			points = savedInstanceState.getInt("points");
 
 			gameRunning = savedInstanceState.getBoolean("gameRunning");
 			counter = savedInstanceState.getInt("counter");
 			// TODO - den sætter points til 0, når man vender skærmen??
-			points = savedInstanceState.getInt("points");
+			//points = savedInstanceState.getInt("points");
 
 			// hvis der er gemt noget
 			//if (saved != null) {
@@ -163,7 +164,7 @@ public class MainActivity extends Activity {
 			//}
 		} else {
 			gameRunning = true;
-			points = 0;
+			//points = 0;
 		}
 
 		// finder alle knapper
