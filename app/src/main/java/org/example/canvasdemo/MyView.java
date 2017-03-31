@@ -22,13 +22,11 @@ public class MyView extends View{
 	// arrayliste for goldcoin - igen
 	ArrayList<GoldCoin> goldcoins = new ArrayList<GoldCoin>();
 
-	// arrayliste for ghots
+	// arrayliste for ghosts - igen
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-
 
 	// får fat i MainActivity og ligger det i myActivity variabel
 	MainActivity myActivity = (MainActivity) getContext();
-
 
 	// pacman
 	Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pacman);
@@ -36,20 +34,15 @@ public class MyView extends View{
 	// goldcoin
 	Bitmap coinbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.goldcoin);
 
-	// ghost
+	// ghost/enemy
 	Bitmap ghostbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ghost);
-
-	int enemypos1;
-	int enemypos2;
 
     //The coordinates for our dear pacman: (0,0) is the top-left corner
 	int pacx = 50;
     int pacy = 400;
     int h,w; //used for storing our height and width
 
-
-
-	// tager metoden fra
+	// sætter coins ud fra resetGoldCoins metoden fra activity
 	public void setCoins(ArrayList<GoldCoin> coins) {
 
 		// gemme det i en variabel - som skal loopes igennem nede ved onDraw
@@ -57,7 +50,7 @@ public class MyView extends View{
 
 	}
 
-	// tager metoden fra
+	// sætter spøgelser ud fra spawnEnemies metoden fra activity
 	public void setGhosts(ArrayList<Enemy> ghosts) {
 
 		// gemme det i en variabel - som skal loopes igennem nede ved onDraw
@@ -65,166 +58,141 @@ public class MyView extends View{
 
 	}
 
-
+	// denne metode kaldes, når spilleren trykker på "right" knappen og bevæger Pacman til højre (aka fremad) - også denne metode der bruges ved spillets start
     public void moveRight(int x)
     {
     	//still within our boundaries?
 		// bevæger sig plus på x, så til højre
-		// pacx her!
     	if (pacx+x+bitmap.getWidth()<w)
     		pacx=pacx+x;
 		else {
+			// gør at Pacman kommer ind fra venstre side, når han har bevæget sig helt til højre
 			pacx=0;
 		}
 
-
-    	invalidate(); //redraw everything - this ensures onDraw() is called.
+		// opdatere view
+    	invalidate();
     }
 
+    // denne metode kaldes, når spilleren trykker på "left" knappen og bevæger Pacman til venstre (aka baglæns)
 	public void moveLeft(int x)
 	{
 		// bevæger sig minus på x, så til venstre
-		// skal gerne være minus her og skal være ved 0, da det er startpunktet
-		// for koordinatsystemet og det er jo venstre vi arbejder med
+		// skal gerne være minus her og skal være ved 0, da det er startpunktet for koordinatsystemet og det er venstre vi arbejder med
 		if (pacx-x>0)
 			pacx=pacx-x;
 		else {
+			// gør at Pacman kommer ind fra højre side, når han har bevæget sig helt til venstre
 			pacx=650;
 		}
 
+		// opdatere view
 		invalidate();
 	}
 
+	// denne metode kaldes, når spilleren trykker på "up" knappen og bevæger Pacman opad
 	public void moveUp(int y)
 	{
 		// bruger y da det er opad og minus
-		// skal gerne være minus her og skal være ved 0, da det er startpunktet
-		// for koordinatsystemet og det er jo venstre vi arbejder med
-		// pacy her!
+		// skal gerne være minus her og skal være ved 0, da det er startpunktet for koordinatsystemet og det er opad vi arbejder med
 		if (pacy-y>0)
 			pacy=pacy-y;
 		else {
+			// gør at Pacman kommer op fra bunden, når han har bevæget sig helt op i toppen
 			pacy=650;
 		}
+
+		// opdatere view
 		invalidate();
 	}
 
+	// denne metode kaldes, når spilleren trykker på "down" knappen og bevæger Pacman nedad
 	public void moveDown(int y)
 	{
 		// bruger y da det er nedad og plus
 		if (pacy+y+bitmap.getWidth()<h)
 			pacy=pacy+y;
 		else {
+			// gør at Pacman kommer ned fra toppen, når han har bevæget sig helt ned i bunden
 			pacy=0;
 		}
-
-		invalidate();
-	}
-
-	//int enemyy = enemies.get(0).getEnemyy();
-	//int enemyx = enemies.get(0).getEnemyx();
-
-	public void moveEnemyDown(int y) {
-		// får fjenden til at bevæge sig nedad
-
-		if (enemies.get(0).getEnemyy()+y+ghostbitmap.getWidth()<h) {
-			// får fjenden til at bevæge sig nedad
-			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10); // var + 10
-		} else {
-			// kommer igennem skærmen som Pacman også gør
-			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() - 650);
-		}
-
-		invalidate();
-	}
-
-	/*
-
-	public void moveEnemyUp(int y) {
-
-		// får fjenden til at bevæge sig opad
-		if (enemies.get(0).getEnemyy()-y<0) {
-			// får fjenden til at bevæge sig nedad
-			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() - 10);
-		} else {
-			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 50);
-		}
-
-
-		//enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() - 5);
-
-		invalidate();
-	}
-
-	public void moveEnemyLeft(int x) {
-
-		// får fjenden til at bevæge sig til venstre
-		enemies.get(0).setEnemyx(enemies.get(0).getEnemyx() - 5);
-
-		invalidate();
-	}
-
-	public void moveEnemyRight(int x) {
-
-		// får fjenden til at bevæge sig til højre
-		enemies.get(0).setEnemyx(enemies.get(0).getEnemyx() + 5);
-
-		invalidate();
-	}
-	*/
-
-	public void resetGame()
-	{
-		// resetter Pacman's position
-		pacx = 50;
-
-		myActivity.level = 1;
-
-		// skal resette goldcoins - fjerner alle goldcoins
-		goldcoins.clear();
-
-		// skal tegne goldcoins igen - metoder her hvor der skal clear points og resette gold coins positioner igen
-		myActivity.clearPoints();
-		myActivity.resetGoldCoins();
-
-		// når spillet startes på ny, sætter jeg den i gang med at køre spillet
-		// så Pacman bevæger sig og bevæger sig fremad
-		myActivity.gameRunning = true;
-		myActivity.pacmanDirection = 1;
-		myActivity.clearTimer();
-
-		// resetter fjender
-		enemies.clear();
-		myActivity.spawnEnemies();
-
 
 		// opdatere view
 		invalidate();
 	}
 
-	public void newLevel(int x, int y, int level) //,ArrayList<GoldCoin> goldcoins, int level, int points, ArrayList<Enemy> enemies)
+
+	// denne metode kaldes, når spillet køres, hvor spøgelset bevæger sig nedad
+	public void moveEnemyDown(int y) {
+
+		// tjekker om fjendens position stemmer overens med canvassets højde
+		if (enemies.get(0).getEnemyy()+y+ghostbitmap.getWidth()<h) {
+			// får fjenden til at bevæge sig nedad
+			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10);
+		} else {
+			// bevæger sig ned i bunden og kommer ind igen fra toppen
+			enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() - 650);
+		}
+
+		// opdatere view
+		invalidate();
+	}
+
+
+	// denne metode kaldes, når man starter et nyt spil
+	public void resetGame()
+	{
+		// resetter Pacman's position
+		pacx = 50;
+
+		// level sættes til 1, da man starter forfra i et nyt spil
+		myActivity.level = 1;
+
+		// tømmer arraylisten af coins og resetter coins position
+		goldcoins.clear();
+		myActivity.resetGoldCoins();
+
+		// sætter points til nul, da man starter forfra :)
+		myActivity.clearPoints();
+
+		// når spillet startes på ny, sætter jeg den i gang med at køre spillet, så Pacman bevæger sig og bevæger sig fremad
+		myActivity.gameRunning = true;
+		myActivity.pacmanDirection = 1;
+
+		// timeren bliver resettet
+		myActivity.clearTimer();
+
+		// tømmer arrayliste af enemies og re-spawner fjender
+		enemies.clear();
+		myActivity.spawnEnemies();
+
+		// opdatere view
+		invalidate();
+	}
+
+	// denne metode kaldes, når et level er gennemført og det nye level opsættes
+	public void newLevel(int x, int y, int level)
 	{
 
 		// resetter Pacman's position
 		pacx = x;
 		pacy = y;
 
-		// skal resette goldcoins - fjerner alle goldcoins
+		// tømmer arraylisten af coins og kalder metoden der resetter coins
 		goldcoins.clear();
-
-		// skal tegne goldcoins igen - metoder her hvor der skal clear points og resette gold coins positioner igen
 		myActivity.resetGoldCoins();
 
-		// når spillet startes på ny, sætter jeg den i gang med at køre spillet
-		// så Pacman bevæger sig og bevæger sig fremad
+		// når et nyt level starter, sætter jeg den i gang med at køre spillet, så Pacman bevæger sig og bevæger sig fremad (mod højre)
 		myActivity.gameRunning = true;
 		myActivity.pacmanDirection = 1;
+		// resetter timeren, så den starter forfra
 		myActivity.clearTimer();
 
-		// resetter fjender
+		// tømmer arraylisten af enemies og re-spawner enemeis
 		enemies.clear();
 		myActivity.spawnEnemies();
 
+		// holder styr på level
 		myActivity.level = level;
 
 		// opdatere view
@@ -232,45 +200,36 @@ public class MyView extends View{
 	}
 
 
-
-	public void rotateScreen(int level) { //int points) { // int x, int y, int ghostx, int ghosty, int level
-
-		// sætter værdierne omvendt, da skærmen roteres
-		//pacx = y;
-		//pacy = x;
+	// denne metode kaldes ved orientation change og har til formål at ændre Pacmans position og spøgelsets position
+	public void rotateScreen(int level) {
 
 		// sætter Pacmans position til noget nyt ved orientation change
 		pacx = 50;
 		pacy = 50;
 
-		// sætter fjendens position til ny ved orientation change
-		//enemypos2 = (enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 10));
-		//moveEnemyUp(20);
-
-		//
+		// sætter spillet til at køre og hiver fat i level fra activity
 		myActivity.gameRunning = true;
 		myActivity.level = level;
+
+		// kunne ikke få fat i de rigtige points ved orientation change, selvom den gemte og fandt de rigtige points i savedInstanceState.. mystisk
 		//myActivity.points = points;
         //myActivity.pointChanger(points);
 
-		// prøver at sætte fjendens position
-		//enemies.get(0).setEnemyy(enemies.get(0).getEnemyy() + 200);
+		// opretter en ny fjende og tilføjer til arraylisten "enemies"
 		Enemy enemy = new Enemy();
 		enemies.add(enemy);
 
+		// her prøver jeg at sætte fjendens nye position ved orientation change
 		enemies.get(0).setEnemyx(200);
-		enemies.get(0).setEnemyy(50);
+		enemies.get(0).setEnemyy(150);
 
-
-		// bytter også rundt på værdierne for ghost - dropper det igen
-		//enemypos1 = ghostx;
-		//enemypos2 = ghosty;
+		// opdatere view
+		invalidate();
 	}
 
 
 	/* The next 3 constructors are needed for the Android view system,
-	when we have a custom view.
-	 */
+	when we have a custom view. */
 	public MyView(Context context) {
 		super(context);
 		
@@ -286,10 +245,11 @@ public class MyView extends View{
 		super(context,attrs,defStyleAttr);
 	}
 
+	// dette bruges til at afregne distancen mellem Pacman og mønter og Pacman og spøgelset, som bruges i onDraw metoden
 	public double distance(int x1, int y1, int x2, int y2) {
 
-		// skal bruge pythagoras til at udregne distancen mellem pacman og coins
-		// skal huske at det skal være i anden, så det skal ganges med sig selv
+		// her tages den ene x værdi minus den anden x værdi og så ganges det med sig selv og det samme gøres ved y-værdierne
+		// pythagoras' sætning
 		double distancemath = sqrt(((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
 
 		return distancemath;
@@ -308,18 +268,12 @@ public class MyView extends View{
 		//setting the color
 		paint.setColor(Color.RED);
 		canvas.drawColor(Color.WHITE); //clear entire canvas to white color
-		//drawing a line from (0,0) -> (300,200)
-		//canvas.drawLine(0,0,300,200,paint);
-		//paint.setColor(Color.GREEN);
-		//canvas.drawLine(0,200,300,0,paint);
 		
 		//setting the color using the format: Transparency, Red, Green, Blue
 		paint.setColor(0xff000099);
-		
-		//drawing a circle with radius 20, and center in (100,100) 
-		//canvas.drawCircle(100,100,20,paint);
 
-		// kalder metoden for gameover?
+
+		// kalder metoden for game over
 		myActivity.isGameOver();
 
 		// looper igennem de coins der er i goldcoins arraylisten
@@ -328,24 +282,24 @@ public class MyView extends View{
 			// tilgår coinTaken fra GoldCoin klassen
 			boolean cointaken = coin.isCoinTaken();
 
-			// hvis coin er taget, skal den ikke tegnes
+			// tjekker om coin er taget
 			if(cointaken) {
-				// så skal scoren opdateres og der skal lægges point
-				// til hver gang der tages en coin
 
+			// hvis coin er taget, skal den ikke tegnes
 
 			} else {
-				// tegner hver coin på canvasset
+
+				// tegner hver coin på canvasset, hvis disse ikke er taget af Pacman
 				canvas.drawBitmap(coinbitmap, coin.getCoinx(), coin.getCoiny(), paint);
 			}
 
-			// havde <= 4 før
+			// tjekker om Pacman har taget en mønt og om mønten ikke er taget
 			if ((distance(pacx, pacy, coin.getCoinx(), coin.getCoiny()) <= 50) && !coin.isCoinTaken()) {
 
-				// her kalder jeg metoden pointChanger, som skal opdatere textview'et, med 1 hver gang den kaldes
+				// her kalder jeg metoden pointChanger, som skal opdatere textview'et, med 1 point hver gang den kaldes
 				myActivity.pointChanger(1);
 
-				// sætter coinTaken til at være true, fordi den bliver taget af pacman
+				// sætter coinTaken til at være true, fordi den bliver taget af Pacman
 				coin.setCoinTaken(true);
 			}
 
@@ -354,38 +308,19 @@ public class MyView extends View{
 		// looper igennem de enemies der er i enemies arraylisten
 		for (Enemy enemy : enemies) {
 
-			// tilgår coinTaken fra GoldCoin klassen
-			//boolean enemyhit = enemy.didEnemyHit();
+			// tegner hvert spøgelse (som i dette tilfælde er ét spøgelse) på canvasset
+			canvas.drawBitmap(ghostbitmap, enemy.getEnemyx(), enemy.getEnemyy(), paint);
 
-			// hvis coin er taget, skal den ikke tegnes
-			//if(enemyhit) {
-				// så skal scoren opdateres og der skal lægges point
-				// til hver gang der tages en coin
-
-
-			//} else {
-				// tegner hver coin på canvasset
-				canvas.drawBitmap(ghostbitmap, enemy.getEnemyx(), enemy.getEnemyy(), paint);
-			//}
-
-			// havde <= 4 før
+			// her tjekkes om Pacman rammer spøgelset og om fjenden ikke har ramt Pacman endnu
+			// hvis de rammer hinanden, så sættes fjenden til at have ramt Pacman ved at bruge setEnemyHit fra Enemy klassen
 			if ((distance(pacx, pacy, enemy.getEnemyx(), enemy.getEnemyy()) <= 50) && !enemy.didEnemyHit()) {
 
 				enemy.setEnemyHit(true);
 			}
-
-			// prøver at finde fjendens position
-			//enemypos1 = enemies.get(0).getEnemyy();
-			//enemypos2 = enemies.get(0).getEnemyx();
-
-			// enemypos1 = enemies.get(0).setEnemyy(20);
-
-
-
 		}
 
 
-
+		// Pacman tegnes på canvasset med hans x og y position
 		canvas.drawBitmap(bitmap, pacx, pacy, paint);
 		super.onDraw(canvas);
 	}

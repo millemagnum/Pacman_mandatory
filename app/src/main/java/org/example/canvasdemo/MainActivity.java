@@ -28,69 +28,67 @@ public class MainActivity extends Activity {
 	// arrayliste for enemies
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
+	// context bruges til toasts
 	static Context context;
 
-	// bruges til point for Pacman
+	// bruges til point for Pacman - her som 0 når spillet starter
 	int points = 0;
 
 	// timer der skal bruges til at "animere" Pacman
 	private Timer timer;
 
-	// timer til countdown
+	// timer til countdown, der skal holde styr på tiden og tælle ned
 	private Timer countdown;
 
-	// timer til enemy
+	// timer til enemy, der skal bruges til at "animere" fjenden
 	private Timer enemytimer;
 
-	// counter for countdown
-	private int counter = 60; // skal ændres til 10 sek til debug
+	// counter for countdown - tiden starter på 60 sek.
+	private int counter = 60;
 
-	// game running
+	// boolean for om spillet kører
 	public boolean gameRunning = false;
 
 	// direction value for at holde styr på hvor Pacman bevæger sig hen
 	public int pacmanDirection = 1;
 
-	public int ghostDirection = 1;
-
-	// bestemmer at level skal være 1
+	// bestemmer at level skal være 1 til at starte med
 	public int level = 1;
-
 
 	// metode til at tjekke om spillet er slut/tabt
 	public boolean isGameOver() {
 
-
 		// skal loope alle mønter igennem, så den tjekker om alle mønterne er taget
-		boolean allTaken = true; // true
+		boolean allTaken = true;
 
-		// skal kædes sammen med myView - skal være samme for loop som myView??
+		// kædes sammen med myView for at lave et loop, der kører igennem coins
 		for (GoldCoin coin : myView.goldcoins) {
 
-			// tilgår coinTaken fra GoldCoin klassen
+			// tilgår coinTaken fra GoldCoin klassen - getter for cointaken
 			boolean cointaken = coin.isCoinTaken();
 
-			// hvis coin ikke er taget, er allTaken false
+			// hvis alle coins ikke er taget, er allTaken false, da alle coins så ikke er indsamlet
 			if (!cointaken) {
 				allTaken = false;
 			}
 		}
 
+		// boolean der bruges til at tjekke om Pacman er død eller levende :)
 		boolean pacmanDied = false;
 
-		// skal kædes sammen med myView - skal være samme for loop som myView??
+		// kædes sammen med myView for at lave et loop, der kører igennem enemies
 		for (Enemy enemy : myView.enemies) {
 
-			// tilgår enemyhit fra Enemy klassen
+			// tilgår enemyhit fra Enemy klassen - getter for enemyhit
 			boolean enemyhit = enemy.didEnemyHit();
 
-			// hvis enemy rammes, er pacmanDied true, da pacman så dør
+			// hvis enemy rammes, er pacmanDied true, da Pacman så dør
 			if (enemyhit) {
 				pacmanDied = true;
 			}
 		}
 
-		// hvis alle mønter er taget inden tiden er gået, så skal spilleren komme videre
+		// hvis alle mønter er taget inden tiden er gået og Pacman IKKE er død, så skal spilleren komme videre til næste level
 		if(allTaken == true && pacmanDied == false) {
 
 			// laver en toast der kommer frem, når Pacman har taget alle coins og et level er gennemført
@@ -99,20 +97,18 @@ public class MainActivity extends Activity {
 					"Level " + level + " completed", Toast.LENGTH_SHORT);
 			toast.show();
 
-			// stopper spillet!
+			// stopper spillet, da første level er gennemført - bare rolig det bliver sat i gang igen ved newLevel metoden
 			gameRunning = false;
 
-			// increaser level for hver gang man gennemfører det tidligere level
+			// increaser level for hver gang man gennemfører det tidligere level - woohoo level up!
 			level += 1;
 
-			// kalder metode, der resetter Pacman, counter og enemies position for hvert level
-			//myView.newLevel(50, 0, goldcoins, level, points, enemies);
-			myView.newLevel(50, 0, level); // havde 1
+			// kalder metoden newLevel fra myView, som sender Pacmans x, y og level med
+			myView.newLevel(50, 5, level);
 
 		}
 
-
-		// hvis spilleren ikke har fået alle coins og tiden er gået eller Pacman rørte fjenden er der game over!
+		// hvis spilleren ikke har taget alle coins og tiden er gået eller Pacman rørte fjenden er der game over!
 		if(allTaken == false && counter == 0 || pacmanDied == true) {
 
 			// laver en toast, der skriver "Game over"
@@ -123,10 +119,11 @@ public class MainActivity extends Activity {
 			// stopper spillet
 			gameRunning = false;
 
+			// returnere true ift. isGameOver
 			return true;
 		}
 
-		// skal returne false
+		// skal returne false som standard
 		return false;
 	};
 
@@ -135,36 +132,25 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		this.context = this;
+
 		// finder custom view
 		myView = (MyView) findViewById(R.id.gameView);
+
 		// vil bruge dette til at gemme informationer om spillet, så det kan spilles i landscape mode også
 		if (savedInstanceState != null) {
+
+			// får fat i de gemte variabler for enemies, goldcoins, level (hvor rotateScreen kaldes), points, gameRunning og counter
+			// går herind hvis der er gemt noget - før orientation change
 			ArrayList<Enemy> enemies = savedInstanceState.getParcelableArrayList("enemies");
 			ArrayList<GoldCoin> goldcoins = savedInstanceState.getParcelableArrayList("goldcoins");
-			//myView.newLevel(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"),
-					//goldcoins,
-					//savedInstanceState.getInt("level"), savedInstanceState.getInt("points"),
-					//enemies); // crasher her!
-			//myView.newLevel(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"), savedInstanceState.getInt("level")); //= savedInstanceState.getInt("x");
-			//myView.pacx = savedInstanceState.getInt("x");
-			//myView.pacy = savedInstanceState.getInt("y");
-			//level = savedInstanceState.getInt("level");
-			//myView.rotateScreen(savedInstanceState.getInt("x"), savedInstanceState.getInt("y"), savedInstanceState.getInt("ghostx"), savedInstanceState.getInt("ghosty"), savedInstanceState.getInt("level"));
-			myView.rotateScreen(savedInstanceState.getInt("level")); //, savedInstanceState.getInt("points"));
+			myView.rotateScreen(savedInstanceState.getInt("level"));
 			points = savedInstanceState.getInt("points");
-
 			gameRunning = savedInstanceState.getBoolean("gameRunning");
 			counter = savedInstanceState.getInt("counter");
-			// TODO - den sætter points til 0, når man vender skærmen??
-			//points = savedInstanceState.getInt("points");
 
-			// hvis der er gemt noget
-			//if (saved != null) {
-			//	bag = saved;
-			//}
+		// hvis der ikke er gemt noget, så skal spillet bare køre
 		} else {
 			gameRunning = true;
-			//points = 0;
 		}
 
 		// finder alle knapper
@@ -176,21 +162,19 @@ public class MainActivity extends Activity {
 		Button resumebutton = (Button) findViewById(R.id.resumeButton);
 		Button pausebutton = (Button) findViewById(R.id.pauseButton);
 
-
 		// ny timer - for pacman
 		timer = new Timer();
 
-		// ny timer for countdown
+		// ny timer - for countdown (aka nedtælling)
 		countdown = new Timer();
 
-		// enemy timer
+		// ny timer - for enemy
 		enemytimer = new Timer();
 
-		// starter spillet (hvis gameRunning er true)
+		// starter spillet, sætter gameRunning til true
 		gameRunning = true;
 
-		// kalder timeren og bestemmer at det skal være en ny TimerTask
-		// samt at den vil køre timeren med det samme og med 200 milisekunder
+		// kalder timeren for Pacman og bestemmer at det skal være en ny TimerTask samt at den vil køre timeren med det samme og med 200 milisekunder
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -198,7 +182,7 @@ public class MainActivity extends Activity {
 			}
 		}, 0, 200);
 
-		// timer for countdown for spil
+		// timer for countdown for spil - her at milisekunder er 1000 for at tælle ned hvert sekund
 		countdown.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -206,7 +190,7 @@ public class MainActivity extends Activity {
 			}
 		}, 0, 1000);
 
-		// timer for enemies
+		// timer for enemies - samme milisekunder som Pacman
 		enemytimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -215,7 +199,7 @@ public class MainActivity extends Activity {
 		}, 0, 200);
 
 
-		//listener of our pacman - for all the buttons
+		//listener of our pacman - for alle knapper
 		rightbutton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -228,6 +212,8 @@ public class MainActivity extends Activity {
 				pacmanDirection = 1;
 			}
 		});
+
+		// listener for venstre knap
 		leftbutton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -240,6 +226,8 @@ public class MainActivity extends Activity {
 				pacmanDirection = 2;
 			}
 		});
+
+		// listener for op knap
 		upbutton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -252,6 +240,8 @@ public class MainActivity extends Activity {
 				pacmanDirection = 3;
 			}
 		});
+
+		// listener for ned knap
 		downbutton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -264,6 +254,8 @@ public class MainActivity extends Activity {
 				pacmanDirection = 4;
 			}
 		});
+
+		// listener for new game knap
 		newgamebutton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -271,10 +263,12 @@ public class MainActivity extends Activity {
 				// sætter point til at være 0 igen
 				points = 0;
 
-				// bruger metode i custom view, der vil resette Pacman
+				// bruger metode i custom view, der vil resette spillet
 				myView.resetGame();
+
 			}
 		});
+
 		// click event listener der sætter spillet til at køre igen
 		resumebutton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -282,6 +276,7 @@ public class MainActivity extends Activity {
 				gameRunning = true;
 			}
 		});
+
 		// click event listener der pauser spillet
 		pausebutton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -290,13 +285,12 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// kalder goldcoins metoden
+		// kalder goldcoins metoden - spawner coins ved start
 		resetGoldCoins();
 
-		// kalder enemies metoden
+		// kalder enemies metoden - spawner enemies ved start
 		spawnEnemies();
 
-		
 	}
 
 	// runner metode for Pacman
@@ -321,35 +315,27 @@ public class MainActivity extends Activity {
 		public void run() {
 
 			if(gameRunning) {
-				//counter++;
 
-				// finder textview
-				//TextView timer = (TextView) findViewById(R.id.timeCounter);
-
-				// viser tiden der går
-				//timer.setText("Timer: " + counter);
-
-				// denne if-sætning tjekker på hvilken direction Pacman har valgt at gå
-				// værdien sættes oppe ved click listeners på knapperne, som ændres, når
-				// man klikker på de forskellige bevæge-knapper
-				// her bevæger han sig den vej du gerne vil have med timeren
+				// denne if-sætning tjekker på hvilken direction Pacman har valgt at gå og værdien sættes oppe ved click listeners på knapperne, som ændres, når
+				// man klikker på de forskellige bevæge-knapper - her bevæger han sig den vej du gerne vil have med timeren
 				if(pacmanDirection == 1) {
-					// skal flytte Pacman til højre
+
+					// flytter Pacman til højre
 					myView.moveRight(20);
 
 				} else if(pacmanDirection == 2) {
 
-					// skal flytte Pacman til venstre
+					// flytter Pacman til venstre
 					myView.moveLeft(20);
 
 				} else if(pacmanDirection == 3) {
 
-					// skal flytte Pacman upad
+					// flytter Pacman upad
 					myView.moveUp(20);
 
 				} else if(pacmanDirection == 4) {
 
-					// skal flytte Pacman nedad
+					// flytter Pacman nedad
 					myView.moveDown(20);
 
 				}
@@ -364,14 +350,15 @@ public class MainActivity extends Activity {
 		public void run() {
 
 			if (gameRunning) {
+
+				// nedtælling hvis spillet kører
 				counter--;
 
-				// finder textview
+				// finder textview for tids timer
 				TextView timer = (TextView) findViewById(R.id.timeCounter);
 
-				// viser tiden der går
+				// viser tiden der går og counter tæller ned hvert sekund
 				timer.setText("Timer: " + counter);
-
 
 			}
 		}
@@ -383,26 +370,14 @@ public class MainActivity extends Activity {
 		@Override
 		public void run() {
 			if(gameRunning) {
-				// tjekke om fjenden bevæger sig opad eller nedad
-//				if(pacmanDirection == 1) {
-//					ghostDirection = 1;
-//					myView.moveEnemyDown(20);
-//				} else if(pacmanDirection == 2) {
-//					ghostDirection = 2;
-//					myView.moveEnemyUp(20);
-//				} else if(pacmanDirection == 3) {
-//					ghostDirection = 3;
-//					myView.moveEnemyLeft(20);
-//				} else if(pacmanDirection == 4) {
-//					ghostDirection = 4;
-//					myView.moveEnemyRight(20);
-//				}
 
+				// bevæger enemy nedad, hvis spillet kører
 				myView.moveEnemyDown(20);
 			}
 		}
 	};
 
+	// denne metode bruges til at få points til at increase for hver coin der er taget
 	public void pointChanger(int newPoint) {
 
 		// increaser points med 1 for hver gang
@@ -430,17 +405,18 @@ public class MainActivity extends Activity {
 
 	}
 
-	// laver goldcoins
+	// metode til at lave goldcoins - og også få dem til at resette/respawne
 	public void resetGoldCoins() {
+
 		// for loop der kører igennem 0-10 forskellige goldcoins
 		for (int i = 0; i < 10; i++) {
 
-			// laver et random tal mellem 0 og 100
+			// laver et random tal mellem 100 og 600
 			Random randomnumber = new Random();
 			int randomx = randomnumber.nextInt(600) + 100;
 			int randomy = randomnumber.nextInt(600) + 100;
 
-			// tilføjer det til listen, så der er 10 forskellige goldcoins
+			// tilføjer det til arraylisten, så der er 10 forskellige goldcoins i den med hver deres x og y position
 			goldcoins.add(new GoldCoin(randomx, randomy));
 		}
 
@@ -448,73 +424,69 @@ public class MainActivity extends Activity {
 		myView.setCoins(goldcoins);
 	}
 
-	// skal alle coins være i landscape og ved orientation change?? eller er det okay at de ikke er
-	// er det ok at spøgelset ikke kommer 8/10 gange??
-
-	// laver enemies med random placering
+	// metode der laver enemies med random placering
 	public void spawnEnemies() {
 
 			// laver et random tal som bliver x og y position for ghost
+			// random tal mellem 100 og 600
 			for (int i = 0; i < 1; i++) {
 				Random randomnumber2 = new Random();
-				int randomx2 = randomnumber2.nextInt(600) + 100; // var 100
+				int randomx2 = randomnumber2.nextInt(600) + 100;
 				int randomy2 = randomnumber2.nextInt(600) + 100;
 
 				// tilføjer enemies til listen med x og y position
 				enemies.add(new Enemy(randomx2, randomy2));
 			}
 
-
 		// sender metoden til myView med enemies
 		myView.setGhosts(enemies);
 
 	}
 
+	// metode der resetter timeren - for nedtællingen
 	public void clearTimer() {
 
-		// resetter timeren
+		// resetter timeren til 60 sekunder
 		counter = 60;
 
-		// finder textview
+		// finder textview for timeCounter
 		TextView timer = (TextView) findViewById(R.id.timeCounter);
 
 		// viser tiden der går
 		timer.setText("Timer: " + counter);
 
-		// if sætning der sætter timeren ud fra hvilket level man er i - dette er min måde at gøre hver level
-		// sværere at gennemføre
+		// if sætning der sætter counter ud fra hvilket level man er i - dette er min måde at gøre hvert level sværere at gennemføre
 		if(level == 2) {
 
-			// sætter tiden til at være lavere i level 2
+			// sætter tiden til at være 10 sek lavere i level 2
 			counter = 50;
 
 		} else if (level == 3) {
 
-			// sætter tiden til at være endnu mindre i level 3
+			// sætter tiden til at være 10 sek lavere i level 3
 			counter = 40;
 
 		} else if (level == 4) {
 
-			// sætter tiden til at være endnu mindre i level 4
+			// sætter tiden til at være 10 sek lavere i level 4
 			counter = 30;
 
 		} else if (level == 5) {
 
-			// sætter tiden til at være endnu mindre i level 5
+			// sætter tiden til at være 10 sek lavere i level 5
 			counter = 30;
 
 		} else if (level == 6) {
 
-			// sætter tiden til at være endnu mindre i level 6
+			// sætter tiden til at være 10 sek lavere i level 6
 			counter = 20;
 
 		} else if (level == 7) {
 
-			// sætter tiden til at være endnu mindre i level 3
+			// sætter tiden til at være 10 sek lavere i level 3
 			counter = 10;
 
 		}
-
 	}
 
 	@Override
@@ -542,20 +514,13 @@ public class MainActivity extends Activity {
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 
+		// gemmer coins, level, points, gameRunning, counter og enemies i savedInstanceState
 		outState.putParcelableArrayList("goldcoins", goldcoins);
-		//outState.putInt("x", myView.pacy); //pacx
-		//outState.putInt("y", myView.pacx); //pacy
 		outState.putInt("level", level);
 		outState.putInt("points", points);
 		outState.putBoolean("gameRunning", gameRunning);
 		outState.putInt("counter", counter);
-
-		//outState.putBoolean("gameover", isGameOver());
 		outState.putParcelableArrayList("enemies", enemies);
 
-		// prøver at få gemt fjendens position
-		//outState.putInt("ghosty", myView.enemies.get(0).getEnemyx());
-		//outState.putInt("ghostx", myView.enemies.get(0).getEnemyy());
 	}
-
 }

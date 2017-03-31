@@ -9,19 +9,22 @@ import android.os.Parcelable;
 
 public class Enemy implements Parcelable {
 
+    // implementerer Parcelable, for at kunne bruge arraylisten af enemies i savedInstanceState og onSaveInstanceState!
 
+    // boolean der bruges til at tjekke om enemy er ramt
     private boolean enemyHit;
 
-    // getter for enemyHit
+    // getter for enemyHit - returnere om enemy er ramt eller ej
     public boolean didEnemyHit() {
         return enemyHit;
     }
 
-    // setter for enemyHit
+    // setter for enemyHit - bruges til at sætte enemy til at være ramt
     public void setEnemyHit(boolean enemyHit) {
         this.enemyHit = enemyHit;
     }
 
+    // x værdi for enemy
     private int enemyx = 100;
 
     // getter for enemyx
@@ -34,6 +37,7 @@ public class Enemy implements Parcelable {
         this.enemyx = enemyx;
     }
 
+    // y værdi for enemy
     private int enemyy = 150;
 
     // getter for enemyy
@@ -48,6 +52,7 @@ public class Enemy implements Parcelable {
 
     public Enemy() {} // tom constructor som vi vil bruge senere
 
+    // constructor for Enemy, der kræver x og y position
     public Enemy(int enemyx, int enemyy) {
         this.enemyx = enemyx;
         this.enemyy = enemyy;

@@ -12,21 +12,22 @@ import java.util.Random;
 
 public class GoldCoin implements Parcelable {
 
-    // skal lave gettere og settere for coinTaken, der skal returnere om coin
-    // er taken eller ej - true eller false
+    // implementerer Parcelable, for at kunne bruge arraylisten af goldcoins i savedInstanceState og onSaveInstanceState!
 
+    // boolean der bruges til at tjekke om coin er taken
     private boolean coinTaken;
 
-    // getter for cointaken
+    // getter for cointaken - returnere om coin er taken eller ej
     public boolean isCoinTaken() {
         return coinTaken;
     }
 
-    // setter for cointaken
+    // setter for cointaken - bruges til at sætte coin til at være taken
     public void setCoinTaken(boolean coinTaken) {
         this.coinTaken = coinTaken;
     }
 
+    // x værdi for coin
     private int coinx = 100;
 
     // getter for coinx
@@ -39,6 +40,7 @@ public class GoldCoin implements Parcelable {
         this.coinx = coinx;
     }
 
+    // y værdi for coin
     private int coiny = 150;
 
     // getter for coiny
@@ -53,6 +55,7 @@ public class GoldCoin implements Parcelable {
 
     public GoldCoin() {} // tom constructor som vi vil bruge senere
 
+    // constructor for GoldCoin, der kræver x og y position
     public GoldCoin(int coinx, int coiny) {
         this.coinx = coinx;
         this.coiny = coiny;
